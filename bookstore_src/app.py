@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 import sqlite3
 
@@ -8,8 +8,7 @@ DATABASE = "bookstore.db"
 
 def get_db_connection():
     conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row  # SQLite normally gives us rows as tuples, where we access values by position (row[2])
-                                    # The row factory lets us access values by column name instead (row["title"] or {{ row.title }})
+    conn.row_factory = sqlite3.Row
     return conn
 
 
@@ -61,7 +60,8 @@ def category():
         selectedCategory=selected_category,
         books=books,
         searchTerm=None,
-        nothingFound=False
+        nothingFound=False,
+        pageTitle=None
     )
 
 
@@ -92,8 +92,10 @@ def search():
         selectedCategory=None,
         books=books,
         searchTerm=term,
-        nothingFound=(len(books) == 0)
+        nothingFound=(len(books) == 0),
+        pageTitle="Search Results"
     )
+
 
 @app.route("/book", methods=["GET"])
 def book_detail():
@@ -102,7 +104,9 @@ def book_detail():
     conn = get_db_connection()
 
     categories = conn.execute("""
-        SELECT * FROM category ORDER BY categoryName
+        SELECT *
+        FROM category
+        ORDER BY categoryName
     """).fetchall()
 
     book = conn.execute("""
@@ -120,12 +124,15 @@ def book_detail():
         categories=categories
     )
 
+
 @app.route("/add-book", methods=["GET", "POST"])
 def add_book():
     conn = get_db_connection()
 
     categories = conn.execute("""
-        SELECT * FROM category ORDER BY categoryName
+        SELECT *
+        FROM category
+        ORDER BY categoryName
     """).fetchall()
 
     if request.method == "POST":
@@ -148,6 +155,93 @@ def add_book():
 
     conn.close()
     return render_template("add_book.html", categories=categories)
+
+
+@app.route("/authors", methods=["GET"])
+def authors():
+    conn = get_db_connection()
+
+    categories = conn.execute("""
+        SELECT *
+        FROM category
+        ORDER BY categoryName
+    """).fetchall()
+
+    authors = conn.execute("""
+        SELECT DISTINCT author
+        FROM book
+        ORDER BY author
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "authors.html",
+        categories=categories,
+        authors=authors
+    )
+
+
+@app.route("/author", methods=["GET"])
+def author_search():
+    author = request.args.get("author", "").strip()
+
+    conn = get_db_connection()
+
+    categories = conn.execute("""
+        SELECT *
+        FROM category
+        ORDER BY categoryName
+    """).fetchall()
+
+    books = conn.execute("""
+        SELECT *
+        FROM book
+        WHERE lower(author) LIKE lower(?)
+        ORDER BY title
+    """, (f"%{author}%",)).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "category.html",
+        categories=categories,
+        selectedCategory=None,
+        books=books,
+        searchTerm=author,
+        nothingFound=(len(books) == 0),
+        pageTitle=f"Books by {author}" if author else "Books by Author"
+    )
+
+
+@app.route("/read-now", methods=["GET"])
+def read_now():
+    conn = get_db_connection()
+
+    categories = conn.execute("""
+        SELECT *
+        FROM category
+        ORDER BY categoryName
+    """).fetchall()
+
+    books = conn.execute("""
+        SELECT *
+        FROM book
+        WHERE readNow = 1
+        ORDER BY title
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "category.html",
+        categories=categories,
+        selectedCategory=None,
+        books=books,
+        searchTerm=None,
+        nothingFound=(len(books) == 0),
+        pageTitle="Read Now Books"
+    )
 
 
 @app.errorhandler(Exception)
