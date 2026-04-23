@@ -1,42 +1,50 @@
 {% extends 'base.html' %}
+
 {% block container %}
-<main>
-    <div id="mainLeft">
+
+<div id="homePage">
+
+    <section id="mainLeft">
         <h1 class="welcomeText">
-            Welcome to the single source for all your music book needs!
+            Discover books that help you grow, imagine, and explore.
         </h1>
 
         <p class="welcomeText">
-            If you want to learn about music theory or the people that compose it, we have something for you
+            Our bookstore brings together thoughtful reads across self-improvement, memoir, fantasy, and science fiction.
         </p>
-        <p class="welcomeText">
-            If you want help in playing an instrument or if you want some music to play, you've come to the right place
-        </p>
-        <p class="welcomeText">
-            We have the most extensive music book selection online and we keep our prices as low as we can to keep you coming back.
-        </p>
-    </div>
 
-    <div id="mainRight">
-        <h1>Shop by category:</h1>
+        <p class="welcomeText">
+            Whether you want practical advice, inspiring life stories, immersive fantasy worlds, or futuristic adventures, you can browse by category and find something that fits your mood.
+        </p>
+
+        <p class="welcomeText">
+            Start with a category, search for a title, or explore books by your favorite author.
+        </p>
+    </section>
+
+    <section id="mainRight">
+        <h1>Browse by Category</h1>
+
         <div id="categorySelections">
             {% for category in categories %}
-            <div class="category">
-                <p>
-                    <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                <div class="categoryCard">
+                    <a href="{{ url_for('category', categoryId=category.categoryId) }}"
+                       class="categoryNameLink">
                         {{ category.categoryName }}
                     </a>
-                </p>
 
-                <a href="{{ url_for('category', categoryId=category.categoryId) }}">
-                    <img
-                        src="{{ url_for('static', filename='images/categories/' + category.categoryName|lower|replace(' ', '-') + '-category.jpg') }}"
-                        alt="{{ category.categoryName }}"
-                    >
-                </a>
-            </div>
+                    <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                        <img
+                            src="{{ url_for('static', filename='images/categories/' + category.categoryImage) }}"
+                            alt="{{ category.categoryName }}"
+                            class="categoryImage"
+                        >
+                    </a>
+                </div>
             {% endfor %}
         </div>
-    </div>
-</main>
+    </section>
+
+</div>
+
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+<div class="formCard">
+    <h2 class="formTitle">Browse by Author</h2>
+
+    {% for author in authors %}
+        <p class="authorLinkRow">
+            <a href="{{ url_for('author_search', author=author.author) }}">
+                {{ author.author }}
+            </a>
+        </p>
+    {% endfor %}
+</div>
+
+{% endblock %}

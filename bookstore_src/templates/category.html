@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<main>
-    <section id="catLeft">
+
+<div id="categoryPage">
+
+    <aside id="catLeft">
+        <h3 class="sideTitle">Categories</h3>
+
         {% for cat in categories %}
             {% if selectedCategory and selectedCategory.categoryId == cat.categoryId %}
                 <p class="selectedCategory">{{ cat.categoryName }}</p>
@@ -14,48 +18,69 @@
                 </p>
             {% endif %}
         {% endfor %}
-    </section>
+
+        <div style="margin-top:30px;">
+            <a href="{{ url_for('home') }}" class="sideLink">Back to Home</a>
+        </div>
+    </aside>
 
     <section id="catRight">
-        {% if searchTerm %}
-            <p style="margin:20px;">Search results for "{{ searchTerm }}"</p>
+        {% if selectedCategory %}
+            <h2 class="pageTitle">{{ selectedCategory.categoryName }}</h2>
+        {% elif pageTitle %}
+            <h2 class="pageTitle">{{ pageTitle }}</h2>
+            {% if searchTerm %}
+                <p class="searchMessage">Results for "{{ searchTerm }}"</p>
+            {% endif %}
+        {% else %}
+            <h2 class="pageTitle">Books</h2>
         {% endif %}
 
         {% if nothingFound %}
-            <p style="color:#dd1d5e; font-weight:bold; margin:20px; font-size:1.2em;">
-                No results found for "{{ searchTerm }}"
-            </p>
+            <p id="notFoundMessage">No results found{% if searchTerm %} for "{{ searchTerm }}"{% endif %}.</p>
         {% endif %}
 
-        {% for book in books %}
-        <div class="book">
-            <div>
-                <a href="{{ url_for('book_detail', bookId=book.bookId) }}">
-    <img
-        src="{{ url_for('static', filename='images/books/' + book.image) }}"
-        alt="{{ book.title }}"
-    >
-         </a>
-            </div>
+        <div class="bookGrid">
+            {% for book in books %}
+                <div class="bookCard">
+                    <div class="bookImageBox">
+                        <a href="{{ url_for('book_detail', bookId=book.bookId) }}">
+                            <img
+                                src="{{ url_for('static', filename='images/books/' + book.image) }}"
+                                alt="{{ book.title }}"
+                                class="bookImage"
+                            >
+                        </a>
+                    </div>
 
-            <div class="bookDetailBox">
-                <p class="bookTitle">
-    <a href="{{ url_for('book_detail', bookId=book.bookId) }}">
-        {{ book.title }}
-    </a>
-                </p>
-                <p class="bookDetail">by {{ book.author }}</p>
-                <p class="bookDetail">ISBN: {{ book.isbn }}</p>
-                <p class="bookPrice">${{ '%.2f'|format(book.price) }}</p>
+                    <div class="bookDetailBox">
+                        <p class="bookTitle">
+                            <a href="{{ url_for('book_detail', bookId=book.bookId) }}">
+                                {{ book.title }}
+                            </a>
+                        </p>
 
-                <a class="actionButton" href="#">Add to cart</a>
+                        <p class="bookDetail">by {{ book.author }}</p>
+                        <p class="bookDetail">ISBN: {{ book.isbn }}</p>
+                        <p class="bookPrice">${{ '%.2f'|format(book.price) }}</p>
 
-                {% if book.readNow == 1 %}
-                    <a class="actionButton" href="#">Read Now</a>
-                {% endif %}
-            </div>
+                        <div class="buttonRow">
+                            <a class="actionButton" href="{{ url_for('book_detail', bookId=book.bookId) }}">
+                                View Details
+                            </a>
+                        </div>
+
+                        <p class="authorLinkRow">
+                            <a href="{{ url_for('author_search', author=book.author) }}">
+                                Books by {{ book.author }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </section>
-</main>
+
+</div>
+
 {% endblock %}

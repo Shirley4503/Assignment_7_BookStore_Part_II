@@ -1,9 +1,25 @@
-{% extends 'base.html' %} {% block container %}
-<h2>Uh oh!</h2>
+{% extends 'base.html' %}
 
-<p>
+{% block container %}
 
-  Unfortunately, it seems that we have encountered an error... and here it is:
-</p>
-<code> {{error}} </code>
+<div class="errorCard">
+    <h2 class="errorTitle">Something went wrong</h2>
+
+    <p>
+        The application ran into an unexpected error while loading this page.
+    </p>
+
+    <p>
+        Please try again or go back to the home page.
+    </p>
+
+    <div class="errorBox">
+        {{ error }}
+    </div>
+
+    <a href="{{ url_for('home') }}" class="actionButton">
+        Back to Home
+    </a>
+</div>
+
 {% endblock %}

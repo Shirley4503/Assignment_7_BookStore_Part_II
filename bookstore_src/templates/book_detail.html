@@ -1,64 +1,60 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<main>
 
-    <!-- Left Category Navigation -->
-    <section id="catLeft">
+<div id="bookDetailPage">
+
+    <aside id="catLeft">
+        <h3 class="sideTitle">Categories</h3>
+
         {% for cat in categories %}
-            <p class="notSelectedCategory">
-                <a href="{{ url_for('category', categoryId=cat.categoryId) }}">
-                    {{ cat.categoryName }}
-                </a>
-            </p>
+            {% if cat.categoryId == book.categoryId %}
+                <p class="selectedCategory">{{ cat.categoryName }}</p>
+            {% else %}
+                <p class="notSelectedCategory">
+                    <a href="{{ url_for('category', categoryId=cat.categoryId) }}">
+                        {{ cat.categoryName }}
+                    </a>
+                </p>
+            {% endif %}
         {% endfor %}
-    </section>
+    </aside>
 
-    <!-- Book Detail Content -->
-    <section id="catRight" style="display:flex; justify-content:center;">
-        <div class="book" style="width:650px; padding:20px; display:flex;">
+    <section id="catRight">
+        <div class="bookDetailCard">
 
-            <!-- Book Image -->
-            <div>
-                <img 
+            <div class="bookImageBox">
+                <img
                     src="{{ url_for('static', filename='images/books/' + book.image) }}"
                     alt="{{ book.title }}"
-                    style="width:250px;">
+                    class="detailImage"
+                >
             </div>
 
-            <!-- Book Detail Box -->
-            <div class="bookDetailBox" style="margin-left:30px; font-size:1em;">
+            <div class="detailPanel">
+                <h1 class="detailTitle">{{ book.title }}</h1>
 
-                <h1 style="margin-bottom:10px;">{{ book.title }}</h1>
+                <p class="detailText"><strong>Author:</strong> {{ book.author }}</p>
+                <p class="detailText"><strong>ISBN:</strong> {{ book.isbn }}</p>
+                <p class="detailText"><strong>Category:</strong> {{ book.categoryName }}</p>
+                <p class="detailPrice">${{ '%.2f'|format(book.price) }}</p>
 
-                <p class="bookDetail"><strong>by {{ book.author }}</strong></p>
-                <p class="bookDetail">ISBN: {{ book.isbn }}</p>
+                <div class="detailButtons">
+                    <a href="{{ url_for('category', categoryId=book.categoryId) }}"
+                       class="actionButton">
+                        Back to Category
+                    </a>
 
-                <!-- Category NAME -->
-                <p class="bookDetail">Category: {{ book.categoryName }}</p>
-
-                <p class="bookPrice" style="margin-top:15px;">
-                    ${{ '%.2f'|format(book.price) }}
-                </p>
-
-                <a class="actionButton" href="#">Add to cart</a>
-
-                {% if book.readNow == 1 %}
-                    <a class="actionButton" href="#">Read Now</a>
-                {% endif %}
-
-                <br>
-
-                <!-- Back button -->
-                <a href="{{ url_for('category', categoryId=book.categoryId) }}"
-                   class="actionButton"
-                   style="width:auto; padding:0 10px; background-color:#00aacc; margin-top:20px;">
-                    Back to Category
-                </a>
+                    <a href="{{ url_for('author_search', author=book.author) }}"
+                       class="secondaryButton">
+                        More by {{ book.author }}
+                    </a>
+                </div>
             </div>
 
         </div>
     </section>
 
-</main>
+</div>
+
 {% endblock %}

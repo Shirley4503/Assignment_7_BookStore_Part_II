@@ -1,68 +1,116 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Treble Clef</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shirley's Bookstore</title>
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-  </head>
-  <body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+
     <header>
-      <div id="leftHeader">
-        <a href="{{ url_for('home') }}">
-          <img src="{{ url_for('static', filename='images/misc/treble-clef-logo.jpg') }}" alt="Treble Clef logo">
-        </a>
-      </div>
-
-      <div id="midHeader">
-        <form id="searchBoxForm" action="{{ url_for('search') }}" method="post">
-          <input id="searchBox" type="text" placeholder="Book Title Search" name="search">
-          <input id="searchIcon" type="image" src="{{ url_for('static', filename='images/misc/search-icon.png') }}" alt="search icon">
-        </form>
-
-        <div class="dropdown">
-          <p class="dropdownSelect">Select Category</p>
-          <div class="dropdownContent">
-            {% for category in categories %}
-              <p>
-                <a href="{{ url_for('category', categoryId=category.categoryId) }}">
-                  {{ category.categoryName }}
-                </a>
-              </p>
-            {% endfor %}
-          </div>
+        <div id="leftHeader">
+            <a href="{{ url_for('home') }}">
+                <img
+                    src="{{ url_for('static', filename='images/misc/bookstore-logo.png') }}"
+                    alt="Bookstore Logo"
+                    id="logo"
+                >
+            </a>
         </div>
-      </div>
 
-      <div id="rightHeader">
-        <div id="cartIcon">
-          <a href="#">
-            <img src="{{ url_for('static', filename='images/misc/cart-icon.jpg') }}" alt="shopping cart icon">
-          </a>
+        <div id="centerHeader">
+            <div id="siteTitle">
+                <a href="{{ url_for('home') }}">Shirley's Bookstore</a>
+            </div>
+
+            <form id="searchBoxForm" action="{{ url_for('search') }}" method="POST">
+                <input
+                    type="text"
+                    name="search"
+                    id="searchBox"
+                    placeholder="Search books by title"
+                >
+                <button type="submit" class="submitButton">
+                    <img
+                        src="{{ url_for('static', filename='images/misc/search-icon.png') }}"
+                        alt="Search"
+                        id="searchIcon"
+                    >
+                </button>
+            </form>
+
+            {% if categories is defined %}
+            <div class="dropdown">
+                <div class="dropdownSelect">Browse Categories</div>
+                <div class="dropdownContent">
+                    {% for category in categories %}
+                        <p>
+                            <a href="{{ url_for('category', categoryId=category.categoryId) }}">
+                                {{ category.categoryName }}
+                            </a>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
-        <div id="cartCount">1 item</div>
-        <div class="loginButton"><a href="#">login</a></div>
-         <div class="loginButton">
-        <a href="{{ url_for('add_book') }}">Add Book</a>
-    </div>
 
-      </div>
+        <div id="rightHeader">
+            <div class="headerLinkGroup">
+                <p class="loginButton">
+                    <a href="{{ url_for('home') }}">Home</a>
+                </p>
 
-     
+                <p class="loginButton">
+                    <a href="{{ url_for('add_book') }}">Add Book</a>
+                </p>
+
+                <p class="loginButton">
+                    <a href="{{ url_for('authors') }}">Authors</a>
+                </p>
+
+                <p class="loginButton">
+                    <a href="{{ url_for('read_now') }}">Read Now</a>
+                </p>
+            </div>
+
+            <div id="cartArea">
+                <img
+                    src="{{ url_for('static', filename='images/misc/cart-icon.png') }}"
+                    alt="Cart"
+                    id="cartIcon"
+                >
+                <p id="cartCount">Cart coming soon</p>
+            </div>
+        </div>
     </header>
 
-    <main>{% block container %}{% endblock %}</main>
+    <main>
+        {% block container %}{% endblock %}
+    </main>
 
     <footer>
-      <div id="footerLeft">
-        <p>The Treble Clef</p>
-        <p>&copy;</p>
-        <a href="#">Contact Us</a>
-        <a href="#">Directions</a>
-      </div>
-      <div id="footerRight">
-        <a href="#"><img src="{{ url_for('static', filename='images/misc/facebook-icon.jpg') }}" alt="Facebook"></a>
-        <a href="#"><img src="{{ url_for('static', filename='images/misc/twitter-icon.jpg') }}" alt="Twitter"></a>
-      </div>
+        <div id="footerLeft">
+            <p>Bookstore Web App Project</p>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('add_book') }}">Add Book</a>
+        </div>
+
+        <div id="footerRight">
+            <img
+                src="{{ url_for('static', filename='images/misc/facebook-icon.png') }}"
+                alt="Facebook"
+                class="socialIcon"
+            >
+            <img
+                src="{{ url_for('static', filename='images/misc/twitter-icon.png') }}"
+                alt="Twitter"
+                class="socialIcon"
+            >
+        </div>
     </footer>
-  </body>
+
+</body>
 </html>
