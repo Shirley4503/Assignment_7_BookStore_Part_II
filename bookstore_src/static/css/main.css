@@ -1,309 +1,574 @@
-/* Styles used on multiple pages */
+/* Global styles */
 
 body {
-    max-width: 1160px;
+    margin: 0;
     font: 1em normal Arial, sans-serif;
-    color: #111111;
+    background-color: #f6fbff;
+    color: #25313c;
 }
-/* rules for the header */
+
+main {
+    min-height: 70vh;
+    padding: 30px 40px;
+}
+
+/* Header */
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-left: 10px;
+    gap: 30px;
+    background-color: #005592;
+    color: white;
+    padding: 20px 40px;
+    flex-wrap: wrap;
 }
 
-/* rules for the center header */
-#searchBoxForm {
-    margin-top: 30px;
+#leftHeader {
     display: flex;
-}
-#searchBox {
-    height: 20px;
+    align-items: center;
 }
 
+#logo {
+    width: 90px;
+    height: auto;
+    border-radius: 10px;
+    background-color: white;
+    padding: 6px;
+}
+
+#centerHeader {
+    flex: 1;
+    min-width: 280px;
+}
+
+#siteTitle {
+    margin-bottom: 18px;
+}
+
+#siteTitle a {
+    color: white;
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#searchBoxForm {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#searchBox {
+    padding: 10px 12px;
+    width: 260px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #25313c;
+}
+
+.submitButton {
+    border: none;
+    border-radius: 8px;
+    background-color: #d9ecfb;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #c7e1f7;
+}
+
+#searchIcon {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
 
 .dropdown {
     position: relative;
     display: inline-block;
-    margin-top: 30px;
+    margin-top: 18px;
 }
 
 .dropdownSelect {
-    width: 189px;
-    padding: 5px;
-    background-color: #dd1d5e;
+    padding: 10px 14px;
+    background-color: rgba(255, 255, 255, 0.22);
     color: white;
-    text-align: center;
-    display: block;
-    border-radius: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .dropdownContent {
     display: none;
     position: absolute;
-    min-width: 200px;
-    padding-top: 5px;
-    z-index: 1;
-    border-radius: 5px;
-    background-color: #dd1d5e;
-    text-align: center;
+    min-width: 220px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 8px 0;
+    margin-top: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+}
+
+.dropdownContent p {
+    margin: 0;
+}
+
+.dropdownContent a {
+    display: block;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: #25313c;
+}
+
+.dropdownContent a:hover {
+    background-color: #eef7ff;
 }
 
 .dropdown:hover .dropdownContent {
     display: block;
 }
 
-.dropdownContent a {
-    color: white;
-    text-decoration: none;
-}
-
-.dropdownContent a:hover {
-    color: #00aacc;
-    text-decoration: none;
-}
-
-/* rules for the right header */
-
 #rightHeader {
     display: flex;
-    margin-top: 40px;
+    flex-direction: column;
+    gap: 18px;
+    align-items: flex-end;
 }
 
-#cartCount{
-    width: 150px;
-    margin: 8px 0 0 10px;
+.headerLinkGroup {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .loginButton {
-    background-color: #dd1d5e;
-    width: 50px;
-    height: 30px;
-    margin: 4px auto 0 auto;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 8px;
+    margin: 0;
 }
 
-.loginButton a{
+.loginButton a {
     color: white;
     text-decoration: none;
-}
-.loginButton a:hover {
-    color: #00aacc;
-    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.22);
+    padding: 8px 14px;
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: 600;
 }
 
-/* rules for the footer */
+.loginButton a:hover {
+    background-color: rgba(255, 255, 255, 0.32);
+}
+
+#cartArea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#cartIcon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+}
+
+#cartCount {
+    margin: 0;
+    font-size: 14px;
+    color: white;
+}
+
+/* Footer */
 
 footer {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
-    margin-left: 10px;
-    padding: 15px 0;
-    font-size: 0.8em;
+    align-items: center;
+    background-color: #dceffc;
+    padding: 18px 40px;
+    font-size: 14px;
+    color: #3d4b57;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 #footerLeft {
     display: flex;
-    justify-content: space-between;
-    margin: 5px 0 0 10px;
-    width: 300px;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-#footerLeft a{
-    padding-top: 12px;
+#footerLeft p {
+    margin: 0;
+}
+
+#footerLeft a {
+    text-decoration: none;
+    color: #3d4b57;
 }
 
 #footerRight {
     display: flex;
-    justify-content: space-between;
-    margin-right: 50px;
-    width: 80px;
-}
-
-#notFoundMessage {
-    color: red;
-}
-
-.commandButton {
-    height: 30px;
-    width: 150px;
-    border-radius: 8px;
-    margin: 20px;
-    text-align: center;
-    line-height: 30px;
-    background-color: #dd1d5e;
-    font-size: smaller;
-    color: white;
-    text-decoration: none;
-    display: block;
-}
-
-
-.submitButton {
-    height: 18px;
-    border-radius: 8px;
-    border: none;
-    margin: 6px 0 0 4px;
-    text-align: center;
-    background-color: #dd1d5e;
-    color: white;
-    font-size: 0.875em;
-    text-decoration: none;
-}
-
-main {
-    display: flex;
-    margin: 5px 0 0 10px;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-
-h1{
-    font-size: 1.6em;
-    font-weight: 700;
-}
-
-/* Styles only used on the index page */
-/* Styles used on the left hand Welcome text section */
-#mainLeft {
-    width: 550px;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    gap: 12px;
     align-items: center;
-    text-align: center;
 }
 
-#mainLeft p{
-    font-size: 120%;
+.socialIcon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+}
+
+/* Index page */
+
+#homePage {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+#mainLeft {
+    flex: 1;
+    min-width: 280px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(77, 119, 160, 0.10);
+}
+
+#mainRight {
+    flex: 1;
+    min-width: 320px;
+    background-color: #f7fbff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(77, 119, 160, 0.10);
 }
 
 .welcomeText {
-    max-width: 400px;
-}
-
-/* Styles used on the right hand Category section */
-#mainRight {
-    max-width: 600px;
-    border-left: 1px solid black;
-    padding: 20px 0;
-    background-color: #fff9fc;
-    text-align: center;
+    line-height: 1.6;
 }
 
 #categorySelections {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
 }
 
-.category {
-    width: 299px;
-    margin-top: 20px;
+.categoryCard {
+    background-color: white;
+    padding: 18px;
+    border-radius: 12px;
     text-align: center;
-    line-height: 40px;
-    color: #dd1d5e;
-    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(77, 119, 160, 0.06);
 }
 
-.category a{
+.categoryNameLink {
     text-decoration: none;
+    color: #25313c;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 12px;
 }
 
+.categoryImage {
+    width: 100%;
+    max-width: 160px;
+    border-radius: 8px;
+}
 
-/* Styles used on the category page */
-/* Styles used for the left hand navigation section */
+/* Category page */
+
+#categoryPage {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
 
 #catLeft {
-    width: 500px;
-    border-right: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 220px;
+    background-color: #edf6fd;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(77, 119, 160, 0.06);
+}
+
+.sideTitle {
+    margin-top: 0;
 }
 
 .notSelectedCategory {
-    height: 30px;
-    width: 150px;
-    border-radius: 8px;
-    margin: 20px;
-    text-align: center;
-    line-height: 30px;
-    background-color: #dd1d5e;
+    margin: 10px 0;
 }
 
-.notSelectedCategory a{
-
-    color: white;
-    font-size: smaller;
+.notSelectedCategory a {
     text-decoration: none;
+    color: #25313c;
 }
 
 .selectedCategory {
-    height: 30px;
-    width: 150px;
-    border: 1px solid #dd1d5e;
-    border-radius: 8px;
-    margin: 20px;
-    text-align: center;
-    line-height: 30px;
-    color: #dd1d5e;
-    font-size: smaller;
+    font-weight: bold;
+    color: #4f83b5;
+    margin: 10px 0;
 }
 
-/* styles for the righthand section that shows all the books */
+.sideLink {
+    text-decoration: none;
+    color: #4f83b5;
+    font-weight: bold;
+}
 
 #catRight {
-    padding: 20px 20px 20px 30px;
-    box-shadow: inset 0 0 0 20px #fff9fc;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff9fc;
+    flex: 1;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(77, 119, 160, 0.10);
 }
 
-.book {
-    width: 350px;
-    margin: 30px;
+.pageTitle {
+    margin-top: 0;
+}
+
+.searchMessage {
+    margin-bottom: 20px;
+}
+
+#notFoundMessage {
+    color: #b94a48;
+    font-weight: bold;
+}
+
+.bookGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.bookCard {
     display: flex;
-    background-color: white;
+    gap: 18px;
+    background-color: #f8fcff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(77, 119, 160, 0.06);
+}
+
+.bookImage {
+    width: 120px;
+    border-radius: 8px;
 }
 
 .bookDetailBox {
-    margin: 20px 0 0 20px;
-    display: flex;
-    flex-direction: column;
-    font-size: 0.875em;
+    flex: 1;
 }
 
 .bookTitle {
+    margin-top: 0;
+    margin-bottom: 8px;
     font-weight: bold;
+}
+
+.bookTitle a {
+    text-decoration: none;
+    color: #25313c;
 }
 
 .bookDetail {
-    margin-top: 4px;
-    font-size: 0.875em;
+    margin: 4px 0;
 }
 
 .bookPrice {
-    margin-top: 4px;
+    margin: 10px 0;
     font-weight: bold;
 }
 
+.buttonRow {
+    margin-top: 14px;
+}
+
 .actionButton {
-    height: 20px;
-    width: 70px;
-    border-radius: 8px;
-    margin-top: 4px;
-    line-height: 20px;
-    text-align: center;
-    background-color: #dd1d5e;
-    color: white;
-    font-size: 0.875em;
+    display: inline-block;
     text-decoration: none;
+    background-color: #6fa9d8;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.actionButton:hover {
+    background-color: #5b97c8;
+}
+
+.authorLinkRow {
+    margin-top: 12px;
+}
+
+.authorLinkRow a {
+    text-decoration: none;
+    color: #4f83b5;
+}
+
+/* Book detail page */
+
+#bookDetailPage {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.bookDetailCard {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.detailImage {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.detailPanel {
+    flex: 1;
+    min-width: 260px;
+}
+
+.detailTitle {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.detailText {
+    margin: 6px 0;
+}
+
+.detailPrice {
+    margin: 14px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.detailButtons {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.secondaryButton {
+    text-decoration: none;
+    background-color: #d9ecfb;
+    color: #25313c;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.secondaryButton:hover {
+    background-color: #c7e1f7;
+}
+
+/* Add book page */
+
+.formCard {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(77, 119, 160, 0.10);
+}
+
+.formTitle {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.formInput,
+.formSelect {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #cfe3f4;
+    border-radius: 8px;
+    background-color: #fcfeff;
+}
+
+.submitMainButton {
+    padding: 10px 20px;
+    background-color: #6fa9d8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.submitMainButton:hover {
+    background-color: #5b97c8;
+}
+
+/* Error page */
+
+.errorCard {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(77, 119, 160, 0.10);
+}
+
+.errorTitle {
+    margin-top: 0;
+    color: #8b3a3a;
+}
+
+.errorBox {
+    margin: 20px 0;
+    padding: 12px;
+    background-color: #eef7ff;
+    border-radius: 8px;
+    font-family: monospace;
+    color: #444;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #rightHeader {
+        align-items: flex-start;
+    }
+
+    #categoryPage,
+    #bookDetailPage {
+        flex-direction: column;
+    }
+
+    #catLeft {
+        width: 100%;
+    }
+
+    .bookCard {
+        flex-direction: column;
+    }
+
+    .bookImage {
+        width: 160px;
+    }
 }
